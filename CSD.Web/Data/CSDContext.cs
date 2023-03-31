@@ -8,6 +8,7 @@ namespace CSD.Web.Data
         {
         }
         public DbSet<Category>  Categories { get; set; }
+        public DbSet<Post> Posts { get; set; }
     }
 
 }
