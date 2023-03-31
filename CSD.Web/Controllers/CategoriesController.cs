@@ -50,7 +50,6 @@ namespace CSD.Web.Controllers
         // POST: Categories/Create 
 
         [HttpPost]
-
         public IActionResult Create(Category category)
         {
             if (ModelState.IsValid)
@@ -59,7 +58,38 @@ namespace CSD.Web.Controllers
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Categories = new SelectList(_db.Categories.Where(x => x.ParentId == 0), "Id", "Name");
             return View(category);
+        }
+        // GET: Categories/Edit/5 
+
+        public ActionResult Edit(int id)
+        {
+            var category = _db.Categories.Find(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return View(category);
+        }
+        // POST: Categories/Edit/5 
+
+        [HttpPost]
+
+        public IActionResult Edit(int id, Category category)
+        {
+            if (id != category.Id)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _db.Update(category);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(category);
+            ViewBag.Categories = new SelectList(_db.Categories.Where(x => x.ParentId == 0), "Id", "Name");
         }
     }
 }
