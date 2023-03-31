@@ -19,9 +19,12 @@
                 <a asp-action="Details" asp-route-id="@item.Id">
                     @item.Name
                 </a>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-danger float-end">
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary float-end">
                     Редактировать
 
+                </a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger float-end mx-2">
+                    Удаление
                 </a>
             </li>
             @foreach (var itemInside in Model)
